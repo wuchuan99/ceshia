@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .clearfix:after{
+            height:0;
+            content:" ";
+            display:block;
+            overflow:hidden;
+            clear:both;
+        }
+        .clearfix{
+            zoom:1;
+        }
+        ul {
+            list-style:none;
+            /* width: 300px; */
+            /* overflow: hidden; */
+            /* height: 100px; */
+        }
+        .box {
+            width: 100%;
+            /* height: 100px; */
+            overflow-x: scroll;
+        }
+        li {
+            height: 50px;
+            line-height: 50px;
+            float: left;
+            text-align: center;
+        }
+        .box {
+            width: 0;
+            height: 0;
+            border-top: 100px solid black;
+            border-right: 50px solid red;
+            border-bottom: 100px solid green;
+            border-left: 50px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        
+    </div>
+    <input type="text" id="inp">
+</body>
+    <!-- 日期控件 -->
+    <script src="./js/jquery.min.js"></script>
+    <script src="./assets/dist/xlsx.core.min.js"></script>
+    <script>
+        var obj = {0: '10', length: 1}
+        var arr1 = Array.prototype.slice.call(obj)
+        console.log(arr1)
+        const object1 = {
+            a: {name: 'ccc', arr: [1, 2]},
+            b: 2,
+            c: [3, 5, 6]
+        };
+        function get(obj){
+            if(typeof obj == 'object'){
+                let objNew = Array.isArray(obj) ? [] : {}
+                for(let key in obj){
+                    objNew[key] = get(obj[key])
+                }
+                return objNew
+            } else {
+              return obj
+            }
+        }
+        const object = get(object1)
+        object.a.arr[1] = 20
+        console.log(object1)
+        function readWorkbookFromLocalFile(file, callback) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var data = e.target.result;
+                var workbook = XLSX.read(data, {type: 'binary'});
+                if(callback) callback(workbook);
+            };
+            reader.readAsBinaryString(file);
+        }
+        function outputWorkbook(workbook) {
+            var sheetNames = workbook.SheetNames; // 工作表名称集合
+            sheetNames.forEach(name => {
+                var worksheet = workbook.Sheets[name]; // 只能通过工作表名称来获取指定工作表
+                for(var key in worksheet) {
+                    // v是读取单元格的原始值
+                    console.log(key, key[0] === '!' ? worksheet[key] : worksheet[key].v);
+                }
+            });
+        }
+
+        function readWorkbook(workbook)
+        {
+            var sheetNames = workbook.SheetNames; // 工作表名称集合
+            var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第一张sheet
+            var csv = XLSX.utils.sheet_to_csv(worksheet);
+            document.getElementById('result').innerHTML = csv2table(csv);
+        }
+
+        // 将csv转换成简单的表格，会忽略单元格合并，在第一行和第一列追加类似excel的索引
+        function csv2table(csv)
+        {
+            var html = '<table>';
+            var rows = csv.split('\n');
+            rows.pop(); // 最后一行没用的
+            rows.forEach(function(row, idx) {
+                var columns = row.split(',');
+                columns.unshift(idx+1); // 添加行索引
+                if(idx == 0) { // 添加列索引
+                    html += '<tr>';
+                    for(var i=0; i<columns.length; i++) {
+                        html += '<th>' + (i==0?'':String.fromCharCode(65+i-1)) + '</th>';
+                    }
+                    html += '</tr>';
+                }
+                html += '<tr>';
+                columns.forEach(function(column) {
+                    html += '<td>'+column+'</td>';
+                });
+                html += '</tr>';
+            });
+            html += '</table>';
+            return html;
+        }
+    </script>
+</html>

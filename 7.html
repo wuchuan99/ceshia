@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        
+    </div>         
+</body>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        const themes = {
+            light: {
+                foreground: '#000000',
+                background: '#eeeeee',
+            },
+            dark: {
+                foreground: '#ffffff',
+                background: '#222222',
+            },
+        };
+        const ThemeContext = React.createContext({
+            theme: themes.dark, // 默认值
+            toggleTheme: () => {},
+        });
+        class ThemedButton extends React.Component {
+            render() {
+                let props = this.props;
+                console.log(props)
+                return (
+                    <ThemeContext.Consumer>
+                        {
+                            context => (
+                                <button  
+                                    onClick={context.toggleTheme}
+                                    style={{backgroundColor: context.theme.background}}
+                                >
+                                    {props.children}
+                                </button>
+                            )
+                        }  
+                    </ThemeContext.Consumer> 
+                );
+            }
+        }
+        function Toolbar(props) {
+            return (
+                <ThemedButton>
+                 Change Theme
+                </ThemedButton>
+            );
+        }
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.toggleTheme = () => {
+                    this.setState(state => ({
+                        theme: state.theme === themes.dark ? themes.light : themes.dark,
+                    }));
+                };
+                this.state = {
+                    theme: themes.light,
+                    toggleTheme: this.toggleTheme
+                };
+
+            }
+
+            render() {
+                // 在 ThemeProvider 内部的 ThemedButton 按钮组件使用 state 中的 theme 值，
+                // 而外部的组件使用默认的 theme 值
+                return (
+                    <div>
+                        <ThemeContext.Provider value={this.state}>
+                            <Toolbar />
+                        </ThemeContext.Provider>
+                        <ThemedButton>default Theme</ThemedButton>
+                    </div>
+                );
+            }
+        }
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        )
+    </script>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue生命周期学习</title>
+  <!-- <script src="https://cdn.bootcss.com/vue/2.6.0/vue.js"></script> -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css"> -->
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  ul {
+    list-style: none;
+  }
+  #app {
+    width: 500px;
+    margin: 200px auto;
+  }
+  .myFour,
+  .myFive {
+    overflow: hidden;
+  }
+  .myFour .box {
+    float: left;
+    margin-right: 20px;
+  }
+  .myFive .box {
+    float: left;
+    margin-right: 20px;
+  }
+  .mySix,
+  .mySeven,
+  .myEight,
+  .myNine {
+    float: left;
+    line-height: 36px;
+  }
+</style>
+<body>
+  <div id="app">
+    <!-- <my-tow id="10"></my-tow> -->
+    <router-view></router-view>
+  </div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/x-template" id="myFirst">
+  <div class="myFirst">
+    <div class="tab">
+      <ul>
+        <router-link v-for="(item, index) in listTab" :key="index" :to="item.url">{{item.tabName}}</router-link>
+      </ul>
+    </div>
+    <router-view></router-view>
+  </div>
+</script>
+<script type="text/x-template" id="myTow">
+  <div class="myTow">
+    123
+  </div>
+</script>
+<script type="text/x-template" id="myThere">
+  <div class="myThere">
+    456
+  </div>
+</script>
+<script type="text/x-template" id="myFour">
+  <div class="myFour">
+    <ul class="box">
+      <router-link tag="li" to="/home/myFour/1/mySix/1">{{11}}</router-link>
+      <router-link tag="li" to="/home/myFour/1/mySeven/2">{{22}}</router-link>
+    </ul>
+    <router-view></router-view>
+  </div>
+</script>
+<script type="text/x-template" id="myFive">
+  <div class="myFive">
+    <ul class="box">
+      <router-link tag="li" to="/home/myFive/2/myEight/1">{{33}}</router-link>
+      <router-link tag="li" to="/home/myFive/2/myNine/2">{{44}}</router-link>
+    </ul>
+    <router-view></router-view>
+  </div>
+</script>
+<script type="text/x-template" id="mySix">
+  <div class="mySix">
+      mySix
+  </div>
+</script>
+<script type="text/x-template" id="mySeven">
+  <div class="mySeven">
+      mySeven
+  </div>
+</script>
+<script type="text/x-template" id="myEight">
+  <div class="myEight">
+    myEight
+  </div>
+</script>
+<script type="text/x-template" id="myNine">
+  <div class="myNine">
+    myNine
+  </div>
+</script>
+<script>
+  const myTen = Vue.extend({
+    template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+    data: function () {
+      return {
+        firstName: 'Walter',
+        lastName: 'White',
+        alias: 'Heisenberg'
+      }
+    }
+  })
+  console.log(myTen)
+  var myFirst = {
+    template: '#myFirst',
+    data() {
+      return {
+        msg: 'hello world',
+        listTab: [
+        {
+          tabName: 'tab1',
+          url: '/myTow/1'
+        },
+        {
+          tabName: 'tab2',
+          url: '/myTow/2'
+        },
+       ]
+      }
+    },
+    props: ['list'],
+    created() {
+      
+    },
+    methods: {
+      
+    },
+  }
+  var myTow = {
+    template: '#myTow',
+    data() {
+      return {
+        
+      }
+    },
+    props: ['id'],
+    created() {
+      console.log(this.id)
+    },
+    methods: {
+      
+    },
+  }
+  var myThere = {
+    template: '#myThere',
+    data() {
+      return {
+        
+      }
+    },
+    props: ['newsletterPopup'],
+    created() {
+      console.log(this.newsletterPopup)
+    },
+    methods: {
+      
+    },
+  }
+  var myFour = {
+    template: '#myFour',
+    data() {
+      return {
+        
+      }
+    },
+    created() {
+      
+    },
+    methods: {
+      
+    },
+  }
+  var myFive = {
+    template: '#myFive',
+    data() {
+      return {
+        
+      }
+    },
+    created() {
+      
+    },
+    methods: {
+      
+    },
+  }
+  var mySix = {
+    template: '#mySix',
+    data() {
+      return {
+        
+      }
+    },
+    created() {
+      console.log(this.$route.params)
+    },
+    methods: {
+      
+    },
+  }
+  var mySeven = {
+    template: '#mySeven',
+    data() {
+      return {
+        
+      }
+    },
+    created() {
+      console.log(this.$route.params)
+    },
+    methods: {
+      
+    },
+  }
+  var myEight = {
+    template: '#myEight',
+    data() {
+      return {
+        
+      }
+    },
+    created() {
+      console.log(this.$route.params)
+    },
+    methods: {
+      
+    },
+  }
+  var myNine = {
+    template: '#myNine',
+    data() {
+      return {
+        
+      }
+    },
+    created() {
+      console.log(this.$route.params)
+    },
+    methods: {
+      
+    },
+  }
+  
+  var router = new VueRouter({
+    mode: 'history',
+    routes: [
+      {
+        path: '/',
+        component: myFirst,
+        children: [
+          {
+            path: '/myFour/:id',
+            component: myFour,
+            children: [
+              {
+                path: '/myFour/:id/mySix/:userId',
+                component: mySix,
+              },
+              {
+                path: '/myFour/:id/mySeven/:userId',
+                component: mySeven,
+              }
+            ]
+          },
+          {
+            path: '/myFive/:id',
+            component: myFive,
+            children: [
+              {
+                path: '/myFive/:id/myEight/:userId',
+                component: myEight,
+              },
+              {
+                path: '/myFive/:id/myNine/:userId',
+                component: myNine,
+              }
+            ]
+          }
+        ]
+      },
+      {
+        meat: '111',
+        path: '/myTow/:id',
+        component: myTow,
+        props: true
+      },
+      {
+        meat: '222',
+        path: '/myThere',
+        component: myThere,
+        props: true
+      }
+    ]
+  })
+  var app = new Vue({
+    router: router,
+    el: '#app',
+    data() {
+      return {
+       num: 10,
+      }
+    },
+    components:{
+      myTow
+    },
+    created() {
+      
+    },
+    mounted() {
+      
+    },
+    methods: {
+      
+    },
+    directives: {
+      
+    },
+    filters: {
+      
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,37 @@
+body .shop {
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+body .shop .left,
+body .shop .right {
+  width: 45%;
+}
+
+body .shop .left h4,
+body .shop .right h4 {
+  font-size: 20px;
+  color: #333;
+}
+
+body .shop .left .body,
+body .shop .right .body {
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  padding: 14px;
+  background-color: #F8F8F8;
+}
+
+body .shop .left .body .layui-input-inline,
+body .shop .right .body .layui-input-inline {
+  width: 60%;
+}
+
+body .shop .left .body .footer,
+body .shop .right .body .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        img {
+            width: 100%;
+            /* -webkit-touch-callout:default; */
+        }
+    </style>
+<body>
+    <img src="./banner2.jpg" alt="">
+</body>
+    <script>
+        class Parent {
+            constructor(){
+                this.z = 3
+            }
+        }
+
+        // Parent.x = 10
+
+        class Child extends Parent {
+            constructor(){
+                super();
+                this.x = 1;
+                this.y = 2;
+            }
+        }
+        var child = new Child()
+        console.log(Child.__proto__ == Parent)
+        console.log(Child.prototype.__proto__ == Parent.prototype)
+        // child.myMethod()
+
+        class A extends Object {
+        }  
+        var cesh = new A() 
+        console.log(cesh)
+
+
+        class VersionedArray extends Array {
+            constructor() {
+                super();
+                this.history = [[]];
+            }
+            commit() {
+                this.history.push(this.slice());
+            }
+            revert() {
+                this.splice(0, this.length, ...this.history[this.history.length - 1]);
+            }
+        }
+
+        var x = new VersionedArray();
+        x.push(1)
+        x.commit()
+        x.push(2, 3, 4)
+        x.commit()
+        // x.revert()
+        x.push(5, 6, 7)
+        console.log(x)
+    </script>
+</html>

@@ -1,0 +1,30 @@
+body {
+    .shop {
+        padding: 50px;
+        display: flex;
+        justify-content: space-between;
+        .left,
+        .right {
+            width: 45%;
+            h4 {
+                font-size: 20px;
+                color: #333;
+            }
+            .body {
+                border:1px solid rgba(227,227,227,1);
+                border-radius:6px;
+                padding: 14px;
+                background-color: #F8F8F8;
+                .layui-input-inline {
+                    width: 60%;
+                }
+                .footer {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 50px;
+                }
+            }
+        }
+    }
+}
