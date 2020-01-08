@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script>
+        let nameList = [
+            {
+                name: 'mark',
+                age: 14,
+                hair: 'long'
+            }, 
+            {
+                name: 'mark',
+                age: 15,
+                hair: 'long'
+            }, 
+            {
+                name: 'tuwen',
+                age: 16,
+                hair: 'short'
+            }, 
+            {
+                name: 'hanmei',
+                age: 14,
+                hair: 'long'
+            },
+            {
+                name: 'tuwen',
+                age: 16,
+                hair: 'short'
+            }, 
+            {
+                name: 'tuwen',
+                age: 17,
+                hair: 'short'
+            },
+        ]
+
+
+        // let res = []
+        // while(nameList.length !== 0){
+        //     let list = nameList.shift()
+        //     let list = nameList[0]
+        //     let arr = [list]
+        //     for (let i = 1; i < nameList.length; i++) {
+        //         if (nameList[i].age === list.age) {
+        //             arr = arr.concat(nameList.splice(i, 1))
+        //             i--
+        //         }
+        //     }
+        //     res.push(arr)
+        // }
+        // console.log(res)
+        // var arr = []
+        // for(var i = 0; i < nameList.length; i++){
+        //     var item = nameList[i]
+        //     var flag = arr.some((value, j) => {
+        //         return item.age == value.age
+        //     })
+        //     if(!flag){
+        //         arr.push(item)
+        //     }
+        // }
+        // console.log(arr)
+        // function fn(n){
+        //     return n || (0 && 10)
+        // }
+        // fn()
+        let foo = function() { console.log(1) };
+        (function foo() {
+            foo = 10  // 由于foo在函数中只为可读，因此赋值无效
+            console.log(foo)
+        }())
+    </script>
+</html>
